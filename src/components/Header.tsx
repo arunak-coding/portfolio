@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Anchor from "./Anchor";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { FiMenu, FiX } from "react-icons/fi";
 
 // const draw = {
@@ -69,17 +69,30 @@ const Header = () => {
       <motion.div className="hidden md:flex items-center justify-between gap-10">
         {navBtns}
       </motion.div>
-      <div className="md:hidden">
-        <button className="text-2xl " onClick={() => setIsOpen(!isOpen)}>
+      <div className="flex items-center md:hidden">
+        <motion.button
+          className="text-4xl"
+          initial={{ color: "#fef8d7" }}
+          whileHover={{ scale: 1.1, color: "#fadb3f" }}
+          whileTap={{ scale: 0.9, color: "#fadb3f" }}
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? <FiX /> : <FiMenu />}
-        </button>
-        {isOpen && (
-          <div className="absolute top-24 right-0.5 z-10 backdrop-blur-lg p-4 bg-cornsilk/3 rounded-2xl">
-            <div className="flex flex-col items-center md:hidden gap-4 justify-self-end">
-              {navBtns}
-            </div>
-          </div>
-        )}
+        </motion.button>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="absolute top-24 right-0.5 z-10 p-4 bg-night border border-mustard rounded-2xl shadow-xl"
+            >
+              <div className="flex flex-col items-center gap-4">{navBtns}</div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

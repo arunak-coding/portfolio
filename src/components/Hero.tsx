@@ -19,8 +19,8 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{
             opacity: [0, 1, 0],
-            x: [610, 650],
-            y: [90, -30],
+            x: ["25vw", "34vw"],
+            y: ["12vh", "-1vh"],
             rotate: ["0deg", "-120deg"],
           }}
           transition={{
@@ -36,8 +36,8 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{
             opacity: [0, 1, 0],
-            x: [610, 630],
-            y: [90, 30],
+            x: ["26vw", "33vw"],
+            y: ["14vh", "5vh"],
             rotate: ["0deg", "-60deg"],
           }}
           transition={{
