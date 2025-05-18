@@ -1,22 +1,35 @@
-import Button from "./Button";
+import { useState } from "react";
+import Anchor from "./Anchor";
 import { motion } from "motion/react";
+import { FiMenu, FiX } from "react-icons/fi";
 
-const draw = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: () => ({
-    pathLength: 1,
-    opacity: 1,
-    transition: {
-      pathLength: { type: "spring", duration: 3, bounce: 0 },
-      opacity: { duration: 0.01 },
-    },
-  }),
-};
+// const draw = {
+//   hidden: { pathLength: 0, opacity: 0 },
+//   visible: () => ({
+//     pathLength: 1,
+//     opacity: 1,
+//     transition: {
+//       pathLength: { type: "spring", duration: 3, bounce: 0 },
+//       opacity: { duration: 0.01 },
+//     },
+//   }),
+// };
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const navBtns = (
+    <>
+      <Anchor label="ABOUT" href="#about" />
+      <Anchor label="SKILLS" href="#skills" />
+      <Anchor label="EXPERIENCE" href="#experience" />
+      <Anchor label="CONTACT" href="#contact" />
+    </>
+  );
+
   return (
-    <div className="w-full backdrop-blur-lg p-4 bg-cornsilk/3 rounded-2xl grid grid-cols-2 items-center">
-      <motion.svg
+    <div className="flex items-center justify-between sticky w-full backdrop-blur-lg px-12 py-4 bg-cornsilk/3 rounded-2xl">
+      {/* <motion.svg
         width="80"
         height="80"
         viewBox="0 0 280 225"
@@ -35,14 +48,39 @@ const Header = () => {
           variants={draw}
           custom={5.5}
         />
-      </motion.svg>
+      </motion.svg> */}
 
-      <motion.div className="grid grid-cols-4">
-        <Button label="About" />
-        <Button label="Skills" />
-        <Button label="Experience" />
-        <Button label="Contact" />
+      <motion.div
+        className="text-5xl font-extrabold italic text-mustard flex"
+        whileHover={{ color: "#fef8d7" }}
+      >
+        {"A.".split("").map((char, index) => (
+          <motion.span
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: index * 0.2 }}
+          >
+            {char}
+          </motion.span>
+        ))}
       </motion.div>
+
+      <motion.div className="hidden md:flex items-center justify-between gap-10">
+        {navBtns}
+      </motion.div>
+      <div className="md:hidden">
+        <button className="text-2xl " onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <FiX /> : <FiMenu />}
+        </button>
+        {isOpen && (
+          <div className="absolute top-24 right-0.5 z-10 backdrop-blur-lg p-4 bg-cornsilk/3 rounded-2xl">
+            <div className="flex flex-col items-center md:hidden gap-4 justify-self-end">
+              {navBtns}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
