@@ -51,7 +51,7 @@ const Header = () => {
       </motion.svg> */}
 
       <motion.div
-        className="text-5xl font-extrabold italic text-mustard flex"
+        className="text-5xl font-extrabold italic text-mustard"
         whileHover={{ color: "#fef8d7" }}
       >
         {"A.".split("").map((char, index) => (
