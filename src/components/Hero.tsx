@@ -1,7 +1,5 @@
 import { motion } from "motion/react";
 
-import { PiStarFourThin } from "react-icons/pi";
-
 const Hero = () => {
   return (
     <div className="flex w-full h-2/3 justify-start items-center p-4">
